@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciestrad <ciestrad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aszamora <aszamora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:43:30 by ciestrad          #+#    #+#             */
-/*   Updated: 2025/01/09 12:45:37 by ciestrad         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:26:55 by aszamora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../cub3D.h"
 
@@ -19,6 +18,10 @@ void	init_rayo(t_ray *rayo_h, t_ray *rayo_v)
 	rayo_v->type = 'v';
 	rayo_h->lenght = __DBL_MAX__;
 	rayo_v->lenght = __DBL_MAX__;
+	rayo_h->rx = 0;
+	rayo_v->rx = 0;
+	rayo_h->ry = 0;
+	rayo_v->ry = 0;
 }
 
 void	which_angle(t_game *game, double angle, t_ray *rayo_h, t_ray *rayo_v)
@@ -53,7 +56,8 @@ void	rayos(t_game *game)
 			game->rayo[i] = rayo_v;
 		game->rayo[i].lenght = fabs(game->rayo[i].lenght
 				* cos(game->rayo[i].angle - game->player.angulo));
-		agn += game->player.fov / (double)WIDTH;
+		//printf(HGRE"%f, %f\n"RST, agn, game->player.fov);
+		agn += ((double)game->player.fov / (double)WIDTH) * (double)ANGLE_TO_RADIAN;
 		i++;
 	}
 }

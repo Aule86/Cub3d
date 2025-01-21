@@ -6,7 +6,7 @@
 /*   By: aszamora <aszamora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 11:33:32 by ciestrad          #+#    #+#             */
-/*   Updated: 2025/01/14 11:30:54 by aszamora         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:04:30 by aszamora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_imagen(t_game *game)
 		game->wall_size = (32 * HEIGHT) / game->rayo[x].lenght;
 		if (game->wall_size > HEIGHT)
 		{
-			game->wall_diff = game->wall_diff - HEIGHT;
+			game->wall_diff = game->wall_size - HEIGHT;
 			game->wall_size = HEIGHT;
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: aszamora <aszamora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:21:36 by ciestrad          #+#    #+#             */
-/*   Updated: 2025/01/14 11:34:30 by aszamora         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:27:04 by aszamora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,23 @@ int	correct_file(char *line)
 		return (0);
 	return (11);
 }
+
 void	init_data(t_game *game)
 {
-	
 	game->player.fov = 60;
 	game->mlx = mlx_init(WIDTH, HEIGHT, "CUBED", true);
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(game->mlx, game->img, 0, 0);
-	
-	
+	game->viewpoint = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(game->mlx, game->viewpoint, 0, 0);
 	//init texturas
 }
 
-void	init_textures(t_game *game)
+/* void	init_textures(t_game *game)
 {
 	game->texture.north.pixel = NULL;
 	game->texture.south.pixel = NULL;
 	game->texture.east.pixel = NULL;
 	game->texture.west.pixel = NULL;
-	load_textures(game);
-}
+} */
 
 /* static void partir(t_game *game)
 {
@@ -76,6 +73,10 @@ int	main(int argc, char **argv)
 	ft_memset(&game, 0, sizeof(t_game));
 	init_data(&game);
 	error = check_input(&(game.map), argv[1]);
+	game.player.px = game.map.player.px;
+	game.player.py = game.map.player.py;
+	game.player.angulo = game.map.player.angulo;
+	game.player.fov = 60;
 	printf("no =%s\n", game.map.no);
 	printf("so =%s\n", game.map.so);
 	printf("ea =%s\n", game.map.ea);
@@ -86,10 +87,12 @@ int	main(int argc, char **argv)
 	printf("width =%d\n", game.map.width);
 	if (error)
 		return (free_map(&game.map), ft_error(error));
-	init_textures(&game);
+	init_texture(&game);
 	rayos(&game);
 	draw_imagen(&game);
 	//partir(&game);
+	mlx_loop_hook(game.mlx, movement, &game);
 	mlx_loop(game.mlx);
+	free_data(&game);
 	return (0);
 }

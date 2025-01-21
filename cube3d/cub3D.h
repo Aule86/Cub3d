@@ -6,7 +6,7 @@
 /*   By: aszamora <aszamora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:22:08 by ciestrad          #+#    #+#             */
-/*   Updated: 2025/01/14 11:13:36 by aszamora         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:48:46 by aszamora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # include <unistd.h>
 # include <math.h>
 # include <stdint.h>
+
+# define HRED	"\033[91m"
+# define HBLU	"\033[94m"
+# define HGRE	"\033[92m"
+# define HMAG	"\033[95m"
+# define RST	"\033[0m"
+
 # define BLOCK_SIZE 32
 
 # define PI 3.14159265358979323846
@@ -67,7 +74,6 @@ typedef struct s_texture
 	t_properties	west;
 }				t_texture;
 
-
 //$(CC) $(CFLAGS) $(MLXFLAGS) $^ libft.a libmlx.a -o $@
 
 typedef struct s_ray
@@ -105,13 +111,11 @@ typedef struct s_game
 	int			wall_size;
 	int			wall_diff;
 	int			sky_size;
-	int			viewpoint;
+	mlx_image_t	*viewpoint;
 	int			ceiling;
 	int			floor;
 
 }	t_game;
-
-
 
 //----errors----
 int				ft_error(int code);
@@ -126,7 +130,6 @@ int				check_map(t_map *map);
 int				check_elements(t_map *map);
 int				check_players(t_map *map);
 void			flot_fill(t_map *map, char **map_copy, int y, int x);
-
 
 //----utils_parse----
 int				set_only(char *line, char *set);
@@ -182,6 +185,8 @@ void			draw_floor(t_game *game, int sky_size, int x);
 
 //----draw_utils----
 int				to_rgba_hex(int red, int green, int blue, int alpha);
+void			free_data(t_game *game);
+void			free_array2(void **array);
 
 //----init_textures----
 void			init_texture(t_game *game);
@@ -193,5 +198,12 @@ void			draw_north_texture(t_game *game, int x, int y);
 void			draw_south_texture(t_game *game, int x, int y);
 void			draw_west_texture(t_game *game, int x, int y);
 void			draw_east_texture(t_game *game, int x, int y);
+
+//---movement---
+
+void			movement(void *mlx);
+void			player_movement(t_game *game);
+void			camera_movement(t_game *game);
+void			check_movement(t_game *game, double delta_x, double delta_y);
 
 #endif

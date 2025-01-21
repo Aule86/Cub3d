@@ -6,7 +6,7 @@
 /*   By: aszamora <aszamora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 11:59:31 by ciestrad          #+#    #+#             */
-/*   Updated: 2025/01/14 11:35:14 by aszamora         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:17:22 by aszamora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_south_texture(t_game *game, int x, int y)
 	int	ty;
 	int	textures_width;
 
-	textures_width = game->texture.south.width;
+	textures_width = game->texture.south.width - 1;
 	tx = game->rayo[x].rx * textures_width / 32;
 	ty = ((y - game->sky_size + game->wall_diff / 2)
 			* game->texture.south.height) / (game->wall_size + game->wall_diff);
@@ -46,8 +46,8 @@ void	draw_west_texture(t_game *game, int x, int y)
 	int	ty;
 	int	textures_width;
 
-	textures_width = game->texture.west.width;
-	tx = game->rayo[x].rx * textures_width / 32;
+	textures_width = game->texture.west.width - 1;
+	tx = game->rayo[x].ry * textures_width / 32;
 	ty = ((y - game->sky_size + game->wall_diff / 2)
 			* game->texture.west.height) / (game->wall_size + game->wall_diff);
 	mlx_put_pixel(game->viewpoint, x, y,
@@ -61,7 +61,7 @@ void	draw_east_texture(t_game *game, int x, int y)
 	int	textures_width;
 
 	textures_width = game->texture.east.width;
-	tx = game->rayo[x].rx * textures_width / 32;
+	tx = game->rayo[x].ry * textures_width / 32;
 	ty = ((y - game->sky_size + game->wall_diff / 2)
 			* game->texture.east.height) / (game->wall_size + game->wall_diff);
 	mlx_put_pixel(game->viewpoint, x, y,
@@ -71,7 +71,7 @@ void	draw_east_texture(t_game *game, int x, int y)
 void	draw_textures(t_game *game, int x, int y)
 {
 	if (game->rayo[x].type == 'h' && game->rayo[x].angle < PI)
-		draw_north_textures(game, x, y);
+		draw_north_texture(game, x, y);
 	else if (game->rayo[x].type == 'h')
 		draw_south_texture(game, x, y);
 	else if (game->rayo[x].type == 'v'

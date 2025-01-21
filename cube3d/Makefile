@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ciestrad <ciestrad@student.42.fr>          +#+  +:+       +#+         #
+#    By: aszamora <aszamora@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/21 12:03:47 by ciestrad          #+#    #+#              #
-#    Updated: 2025/01/10 11:49:42 by ciestrad         ###   ########.fr        #
+#    Updated: 2025/01/16 11:07:31 by aszamora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,10 @@ FILES = get_next_line/get_next_line \
 		src/rayos/ray_select \
 		src/rayos/ray_utils \
 		src/draw/draw_walls\
+		src/draw/draw_utils \
+		src/draw/init_textures \
+		src/draw/textures \
+		src/movimiento/movement \
 
 SRCS = $(addsuffix .c,$(FILES))
 OBJS = $(addsuffix .o,$(FILES))

@@ -1,0 +1,22 @@
+NO ./textures/wolfenstein/blue_brick.png
+SO ./textures/wolfenstein/red_brick.png
+WE ./textures/wolfenstein/metal.png
+EA ./textures/wolfenstein/stone.png
+
+C 0,255,255
+F 48,2,000
+
+       1111 1111 1111
+      1000010000100001
+      1000000000000001
+       10000001000001
+      1000000010000001
+     10000000N000000001
+     100000000000000001
+     100000001000000001
+    100000001 1000000001
+    100000001 1000000001
+     100000001000000001
+      1000000000000001
+       11111101111111
+             1
